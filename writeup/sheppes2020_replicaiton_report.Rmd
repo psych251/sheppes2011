@@ -1,0 +1,110 @@
+---
+title: "Reproducibility Report for Study 1 by Sheppes et al (2011, Psychological Science)"
+author: "Kate Petrova kpetrova@stanford.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+---
+
+<!-- Reproducibility reports should all use this template to standardize reporting across projects. These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
+
+## Introduction
+
+How do people decide which emotion regulation strategy to use in any given situation? A series of experiments reported by Sheppes et al (2011) provides evidence that individuals' choice of emotion regulation strategy is driven by emotional intensity. Specifically, **Study 1 shows that individuals prefer to use cognitive reappraisal when faced with low-intensity negative stimuli and distraction when faced with high-intensity negative stimuli.**
+
+### Justification for choice of study
+
+Past research on emotion-regulation choice has focused largely on *intra*personal emotion regulation. However, in everyday life, people often turn to others for help with their emotion regulation needs—a phenomenon that has come to be known as *inter*personal emotion regulation. As part of my work on interpersonal emotion regulation, I am interested in examining the role of emotional intensity in driving individuals' preference for intrapersonal vs. interpersonal strategies. To this end, I plan to extend the experimental paradigm developed by Sheppes et al (2011) to include interpersonal regulatory options. **Because I plan to conduct my study online, attempting to replicate the finding from the original study (which was done in a laboratory setting) is a critical first step in establishing the robustness of the original finding as well as optimizing the experimental paradigm for online contexts.**
+
+The procedures outlined in the Method section of the original study will be followed with a few necessary deviations. All stimuli will consist of images from the International Affective Picture System (IAPS; Lang et al., 2008).
+</br>
+</br>
+**1. Training phase.** Participants will be instructed to look at 4 images (2 low-intensity and 2 high-intensity) while implementing one of two regulatory strategies:
+</br>
+</br>
+Distraction: thinking about something that is emotionally neutral (2 trials; 1 low-intensity, 1 high-intensity).
+</br>
+Reappraisal: thinking about an image in a way that reduces its negative meaning (2 trials; 1 low-intensity, 1 high-intensity).
+</br>
+</br>
+*Unlike in the original experiment, participants will not be asked to talk out loud about their chosen strategies, and there will be no corrective feedback from the experimenter*.
+</br>
+</br>
+**2. Practice phase.** Participants will complete 8 practice trials: 4 trials with have pre-determined regulation strategy (one trial for each strategy at each intensity level) and 4 trials with participants freely choosing which strategy to use. *Unlike in the original experiment, participants will not be asked to talk out loud about their chosen strategies, and there will be no corrective feedback from the experimenter*.
+</br>
+</br>
+**3. Experimental phase.** Participants will view 30 images and choose one of two regulation strategies to implement for each image. The same 30 images that were used in the original study by Sheppes et al (2011) will be used (a full list of images appears in the Supplementary Materials: LINK). 
+
+### Anticipated challenges
+
+The absence of corrective feedback during the training and practice phases presents a potential challenge for this replication attempt. Screening participants for attention before letting them begin the study is one way of ensuring that participants follow the instructions rather than passively view the stimuli. Including more detailed written instructions for implementing distraction and reappraisal during the training and practice phases will also help maximize correct implementation of the two strategies. 
+
+### Links
+
+Project repository (on Github): https://github.com/psych251/sheppes2011
+
+Original paper (as hosted in your repo): LINK
+
+## Methods
+
+### Description of the steps required to reproduce the results
+
+Please describe all the steps necessary to reproduce the key result(s) of this study. 
+
+### Differences from original study
+
+Explicitly describe known differences in the analysis pipeline between the original paper and yours (e.g., computing environment). The goal, of course, is to minimize those differences, but differences may occur. Also, note whether such differences are anticipated to influence your ability to reproduce the original results.
+
+## Project Progress Check 1
+
+### Measure of success
+
+Please describe the outcome measure for the success or failure of your reproduction and how this outcome will be computed.
+
+
+### Pipeline progress
+
+Earlier in this report, you described the steps necessary to reproduce the key result(s) of this study. Please describe your progress on each of these steps (e.g., data preprocessing, model fitting, model evaluation).
+
+
+## Results
+
+### Data preparation
+
+Data preparation following the analysis plan.
+	
+```{r include=F}
+### Data Preparation
+
+#### Load Relevant Libraries and Functions
+
+#### Import data
+
+#### Data exclusion / filtering
+
+#### Prepare data for analysis - create columns etc.
+```
+
+### Key analysis
+
+The analyses as specified in the analysis plan.  
+
+*Side-by-side graph with original graph is ideal here*
+
+###Exploratory analyses
+
+Any follow-up analyses desired (not required).  
+
+## Discussion
+
+### Summary of Reproduction Attempt
+
+Open the discussion section with a paragraph summarizing the primary result from the key analysis and assess whether you successfully reproduced it, partially reproduced it, or failed to reproduce it.  
+
+### Commentary
+
+Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis of the dataset, (b) assessment of the meaning of the successful or unsuccessful reproducibility attempt - e.g., for a failure to reproduce the original findings, are the differences between original and present analyses ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the reproducibility attempt (if you contacted them).  None of these need to be long.
