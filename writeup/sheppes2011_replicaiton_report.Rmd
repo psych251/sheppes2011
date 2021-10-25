@@ -8,27 +8,55 @@ output:
     toc_depth: 3
     toc_float:
       collapsed: false
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 <!-- Reproducibility reports should all use this template to standardize reporting across projects. These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
 ## Introduction
 
-How do people decide which emotion regulation strategy to use in any given situation? A series of experiments reported by Sheppes et al (2011) provides evidence that individuals' choice of emotion regulation strategy is driven by emotional intensity. Specifically, **Study 1 shows that individuals prefer to use cognitive reappraisal when faced with low-intensity negative stimuli and distraction when faced with high-intensity negative stimuli.**
+How do people decide which emotion regulation strategy to use in any
+given situation? A series of experiments reported by Sheppes et al
+(2011) provides evidence that individuals' choice of emotion regulation
+strategy is driven by emotional intensity. Specifically, **Study 1 shows
+that individuals prefer to use cognitive reappraisal when faced with
+low-intensity negative stimuli and distraction when faced with
+high-intensity negative stimuli.**
 
 ### Justification for choice of study
 
-Past research on emotion-regulation choice has focused largely on *intra*personal emotion regulation. However, in everyday life, people often turn to others for help with their emotion regulation needs—a phenomenon that has come to be known as *inter*personal emotion regulation. As part of my work on interpersonal emotion regulation, I am interested in examining the role of emotional intensity in driving individuals' preference for intrapersonal vs. interpersonal strategies. Replicating the finding from the original study (which was done in a laboratory setting) is a critical first step in establishing the robustness of the original finding as well as optimizing the experimental paradigm for online contexts.
+Past research on emotion-regulation choice has focused largely on
+*intra*personal emotion regulation. However, in everyday life, people
+often turn to others for help with their emotion regulation needs---a
+phenomenon that has come to be known as *inter*personal emotion
+regulation. As part of my work on interpersonal emotion regulation, I am
+interested in examining the role of emotional intensity in driving
+individuals' preference for intrapersonal vs. interpersonal strategies.
+Replicating the finding from the original study (which was done in a
+laboratory setting) is a critical first step in establishing the
+robustness of the original finding as well as optimizing the
+experimental paradigm for online contexts.
 
 ### Anticipated challenges
 
-The absence of corrective feedback during the training and practice phases presents a potential challenge for this replication attempt. Screening participants for attention before letting them begin the study is one way of ensuring that participants follow the instructions rather than passively view the stimuli. Including more detailed written instructions for implementing distraction and reappraisal during the training and practice phases will also help maximize correct implementation of the two strategies. 
+The absence of corrective feedback during the training and practice
+phases presents a potential challenge for this replication attempt.
+Screening participants for attention before letting them begin the study
+is one way of ensuring that participants follow the instructions rather
+than passively view the stimuli. Including more detailed written
+instructions for implementing distraction and reappraisal during the
+training and practice phases will also help maximize correct
+implementation of the two strategies.
 
 ### Links
 
-Project repository (on Github): https://github.com/psych251/sheppes2011
+Project repository (on Github):
+<https://github.com/psych251/sheppes2011>
 
-Original paper (as hosted in your repo): https://github.com/psych251/sheppes2011/blob/main/original_paper/sheppes2011.pdf 
+Original paper (as hosted in your repo):
+<https://github.com/psych251/sheppes2011/blob/main/original_paper/sheppes2011.pdf>
 
 ## Methods
 
@@ -45,12 +73,17 @@ library(pwr)
 
 ### Power Analysis
 
-Converting partial eta squared (reported in the original paper) to f^2 (which is required by the 'pwr' package that will be used for power analysis):
+Converting partial eta squared (reported in the original paper) to f\^2
+(which is required by the 'pwr' package that will be used for power
+analysis):
+
 ```{r power analysis 1, message=FALSE, warning=FALSE, include=TRUE, echo = TRUE}
 effectsize::eta2_to_f2(.71)
 ```
 
-Calculating denominator degrees of freedom (v) for estimation of target effect size for a generalized linear model:
+Calculating denominator degrees of freedom (v) for estimation of target
+effect size for a generalized linear model:
+
 ```{r power analysis 2, message=FALSE, warning=FALSE, include=TRUE, echo = TRUE}
 # 80% power
 pwr.f2.test(u = 1, f2 = 2.45, sig.level = .05, power = .80)
@@ -61,41 +94,66 @@ pwr.f2.test(u = 1, f2 = 2.45, sig.level = .05, power = .90)
 # 95% power
 pwr.f2.test(u = 1, f2 = 2.45, sig.level = .05, power = .95)
 ```
-*Note*: 
-</br>
-* *v = N - 1*
-</br>
-* *I will parameterize the repeated measures ANOVA (that will be used to test the main hypothesis) as a generalized linear mixed model, which is why I used the "f2" option for power calculations.*
+
+*Note*: </br> \* *v = N - 1* </br> \* *I will parameterize the repeated
+measures ANOVA (that will be used to test the main hypothesis) as a
+generalized linear mixed model, which is why I used the "f2" option for
+power calculations.*
 
 ### Planned Sample
 
-A priori power analysis revealed that a minimum sample size of N = 7 is required to detect the main effect f^2 = 2.45 at a significance level of alpha (two-sided) = .05 with at least 95% power. Because the effect size observed in the present replication attempt may be smaller than the effect size reported in the original study (see section on the differences from the original study below), and in order to ensure that the sample is sufficiently large after low quality observations are excluded, I will aim to recruit a sample of the same size as the one used in the original study (N = 20).
+A priori power analysis revealed that a minimum sample size of N = 7 is
+required to detect the main effect f\^2 = 2.45 at a significance level
+of alpha (two-sided) = .05 with at least 95% power. Because the effect
+size observed in the present replication attempt may be smaller than the
+effect size reported in the original study (see section on the
+differences from the original study below), and in order to ensure that
+the sample is sufficiently large after low quality observations are
+excluded, I will aim to recruit a sample of the same size as the one
+used in the original study (N = 20).
 
 ### Materials
 
-Images from the International Affective Picture System (Lang et al., 2008; n = 8 in the training and practice phase; n = 30 in the experimental phase) will be presented to participants using a standard image presentation template in jsPsych. The same images that were used in the original experiment will be used in this replication (a full list of image IDs appears in the [Supplementary Materials:](https://github.com/psych251/sheppes2011/blob/main/original_paper/sheppes2020_supplement.pdf)) of the original paper. 
+Images from the International Affective Picture System (Lang et al.,
+2008; n = 8 in the training and practice phase; n = 30 in the
+experimental phase) will be presented to participants using a standard
+image presentation template in jsPsych. The same images that were used
+in the original experiment will be used in this replication (a full list
+of image IDs appears in the [Supplementary
+Materials:](https://github.com/psych251/sheppes2011/blob/main/original_paper/sheppes2020_supplement.pdf))
+of the original paper.
 
-### Procedure	
+### Procedure
 
-The procedures outlined in the Method section of the original study will be followed with a few necessary deviations (see below). 
-</br>
-</br>
-**1. Training phase.** Participants will be instructed to look at 4 images (2 low-intensity and 2 high-intensity) while implementing one of two regulatory strategies:
-</br>
-</br>
-Distraction: thinking about something that is emotionally neutral (2 trials; 1 low-intensity, 1 high-intensity).
-</br>
-Reappraisal: thinking about an image in a way that reduces its negative meaning (2 trials; 1 low-intensity, 1 high-intensity).
-</br>
-</br>
-**2. Practice phase.** Participants will complete 8 practice trials: 4 trials with have pre-determined regulation strategy (one trial for each strategy at each intensity level) and 4 trials with participants freely choosing which strategy to use. 
-</br>
-</br>
-**3. Experimental phase.** Participants will view 30 images for 500ms and choose one of two regulation strategies to implement for each image. They will then view each image for 5,000ms while implementing the chosen strategy. The same 30 images that were used in the original study by Sheppes et al (2011) will be used
+The procedures outlined in the Method section of the original study will
+be followed with a few necessary deviations (see below). </br> </br>
+**1. Training phase.** Participants will be instructed to look at 4
+images (2 low-intensity and 2 high-intensity) while implementing one of
+two regulatory strategies: </br> </br> Distraction: thinking about
+something that is emotionally neutral (2 trials; 1 low-intensity, 1
+high-intensity). </br> Reappraisal: thinking about an image in a way
+that reduces its negative meaning (2 trials; 1 low-intensity, 1
+high-intensity). </br> </br> **2. Practice phase.** Participants will
+complete 8 practice trials: 4 trials with have pre-determined regulation
+strategy (one trial for each strategy at each intensity level) and 4
+trials with participants freely choosing which strategy to use. </br>
+</br> **3. Experimental phase.** Participants will view 30 images for
+500ms and choose one of two regulation strategies to implement for each
+image. They will then view each image for 5,000ms while implementing the
+chosen strategy. The same 30 images that were used in the original study
+by Sheppes et al (2011) will be used
 
 ### Analysis Plan
 
-The authors of the original study compare how often participants choose reappraisal over distraction (DV: percentage of trials on which reappraisal was chosen) on low-intensity and high-intensity trials (IV: trial type). To characterize the magnitude of the effect of trial type on emotion regulation choice, the authors report the F-value, partial eta squared, and the 95% confidence interval. To facilitate direct comparison of the results reported in the original study to the results obtained as part of this replication attempt, I will fit a one-way repeated-measures ANOVA.
+The authors of the original study compare how often participants choose
+reappraisal over distraction (DV: percentage of trials on which
+reappraisal was chosen) on low-intensity and high-intensity trials (IV:
+trial type). To characterize the magnitude of the effect of trial type
+on emotion regulation choice, the authors report the F-value, partial
+eta squared, and the 95% confidence interval. To facilitate direct
+comparison of the results reported in the original study to the results
+obtained as part of this replication attempt, I will fit a one-way
+repeated-measures ANOVA.
 
 ```{r data prep, message=FALSE, warning=FALSE, include=FALSE}
 setwd("~/OneDrive - Stanford/Classes/PSYC_251/sheppes2011")
@@ -111,11 +169,15 @@ simulated_data <- fake_data |>
             percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100)) |>
   mutate(trial_type = factor(trial_type, levels=c(1, 2), labels=c("Low", "High")))
 ```
+
 Processed data will have the following format:
+
 ```{r show data, include=T, warning=FALSE, message=FALSE, echo = T}
 head(simulated_data)
 ```
+
 Key model parameters will be derived as follows:
+
 ```{r glm, include=T, warning=FALSE, message=FALSE, echo = T}
 # The model is parameterized as a generalized linear mixed effects model for ease of implementation on tidy data. The solution is mathematically equivalent to a standard implementation of a repeated measures ANOVA. 
 model1 <- lmer(percent_reappraisal ~ trial_type + (1|id), simulated_data)
@@ -124,62 +186,122 @@ confint(model1)
 eta_squared(model1)
 ```
 
-**Exclusion criteria.** Participants who fail the attention check at the end of the study will be excluded from analyses (participants will be presented with 9 images: 5 that appeared as part of the experiment and 4 that did not, and asked to select the images that were part of the experiment.) 
+**Exclusion criteria.** Participants who fail the attention check at the
+end of the study will be excluded from analyses (participants will be
+presented with 9 images: 5 that appeared as part of the experiment and 4
+that did not, and asked to select the images that were part of the
+experiment.)
 
-**Clarify key analysis of interest here**  One-way repeated-measures ANOVA.
+**Clarify key analysis of interest here** One-way repeated-measures
+ANOVA.
 
 ### Differences from Original Study
 
-1. Unlike in the original study that was performed in a sample of undergraduate students, the present replication will be performed on a sample of participants recruited online via Prolific. This difference in sample composition is not expected to affect the key outcome of the study.
-2. In addition, unlike the original experiment that took place in a laboratory setting, this replication will be conducted online. This difference in the experimental setting is not expected to affect the key outcome in and of itself. However, because participants will not be asked to talk through their emotion regulation out loud during the training and practice phases, and because there will be no experimenter to provide corrective feedback, it is possible that some participants may fail to apply distraction and reappraisal correctly, which could lead to a smaller effect size in this replication compared to the original study.
-3. Finally, unlike in the original experiment, participants in the present study will not be videotaped to ensure that they are viewing the stimuli without diverting their gaze for the entire duration of stimulus presentation (500 ms during strategy selection and 5,000 ms during strategy implementation). No participants were excluded from the original study because they failed to attend to the stimuli, which is why the lack of videotaping is not expected to affect participant engagement in the present replication attempt. 
+1.  Unlike in the original study that was performed in a sample of
+    undergraduate students, the present replication will be performed on
+    a sample of participants recruited online via Prolific. This
+    difference in sample composition is not expected to affect the key
+    outcome of the study.
+2.  In addition, unlike the original experiment that took place in a
+    laboratory setting, this replication will be conducted online. This
+    difference in the experimental setting is not expected to affect the
+    key outcome in and of itself. However, because participants will not
+    be asked to talk through their emotion regulation out loud during
+    the training and practice phases, and because there will be no
+    experimenter to provide corrective feedback, it is possible that
+    some participants may fail to apply distraction and reappraisal
+    correctly, which could lead to a smaller effect size in this
+    replication compared to the original study.
+3.  Finally, unlike in the original experiment, participants in the
+    present study will not be videotaped to ensure that they are viewing
+    the stimuli without diverting their gaze for the entire duration of
+    stimulus presentation (500 ms during strategy selection and 5,000 ms
+    during strategy implementation). No participants were excluded from
+    the original study because they failed to attend to the stimuli,
+    which is why the lack of videotaping is not expected to affect
+    participant engagement in the present replication attempt.
 
 ### Methods Addendum (Post Data Collection)
 
-You can comment this section out prior to final report with data collection.
+You can comment this section out prior to final report with data
+collection.
 
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+
+Sample size, demographics, data exclusions based on rules spelled out in
+analysis plan
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
 
+Any differences from what was described as the original plan, or "none".
 
-##Results
+## Results Pilot A
 
+Link to experiment:
+<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>
+
+I didn't manage to get access to the full IAPS database by this
+assignment's submission deadline, so, as of Sunday 10/24, the experiment
+was set up with the same 4 images across all training, practice, and
+experimental trials. I expect to get access to the full IAPS during the
+week of 10/25, at which stage I will update my experimental setup as
+follows.
 
 ### Data preparation
 
 Data preparation following the analysis plan.
-	
-```{r include=F}
-###Data Preparation
 
-####Load Relevant Libraries and Functions
-
-####Import data
-
-#### Data exclusion / filtering
-
-#### Prepare data for analysis - create columns etc.
+```{r data prep pilot a, message=FALSE, warning=FALSE, include=TRUE}
+# Concatenated participant data as input
+pilot_a = read_csv("pilot_a.csv")
+head(pilot_a)
+# Tidying + calculating % reappraisal in two types of trials
+pilot_a_tidy <- pilot_a |>
+  mutate(reappraisal = grepl("0", button_pressed)) |>
+  mutate(distraction = grepl("1", button_pressed)) |>
+  group_by(subj_ID, stimulus) |>
+  summarise(
+            percent_reappraisal = ((sum(reappraisal)/(sum(distraction)+sum(reappraisal)))*100),
+            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100)) |>
+  mutate(intensity = factor(stimulus, levels=c(1, 2), labels=c("Low", "High"))) |>
+  select(-stimulus)
+# Tidy data ready for glm
+head(pilot_a_tidy)
 ```
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+```{r glm pilot a, include=T, warning=FALSE, message=FALSE, echo = T}
+model_pilot_a <- lmer(percent_reappraisal ~ intensity + (1|subj_ID), pilot_a_tidy)
+anova(model_pilot_a, test= "F")
+confint(model_pilot_a)
+eta_squared(model_pilot_a)
+```
+
+The analyses as specified in the analysis plan.
 
 *Side-by-side graph with original graph is ideal here*
 
 ###Exploratory analyses
 
-Any follow-up analyses desired (not required).  
+Any follow-up analyses desired (not required).
 
 ## Discussion
 
 ### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+Open the discussion section with a paragraph summarizing the primary
+result from the confirmatory analysis and the assessment of whether it
+replicated, partially replicated, or failed to replicate the original
+result.
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+Add open-ended commentary (if any) reflecting (a) insights from
+follow-up exploratory analysis, (b) assessment of the meaning of the
+replication (or not) - e.g., for a failure to replicate, are the
+differences between original and present study ones that definitely,
+plausibly, or are unlikely to have been moderators of the result, and
+(c) discussion of any objections or challenges raised by the current and
+original authors about the replication attempt. None of these need to be
+long.

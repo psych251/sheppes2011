@@ -1,0 +1,229 @@
+<html>
+  <head>
+    <title>Kate Petrova PSYCH 251 2021</title>
+    <script src="jspsych-6/jspsych.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-image-button-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
+    <link rel="stylesheet" href="jspsych-6/css/jspsych.css">
+  </head>
+  <body></body>
+  <script>
+  
+      var subj_ID = jsPsych.randomization.randomID(5)
+      
+      jsPsych.data.addProperties({
+        subject: subj_ID
+      }) 
+      
+      var instructions_general = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p>No information that could be used to identify you will be collected as part of this study. ...</p><p>Please be aware that the images used in this study contain content that may be unpleasant or disturbing</p><p>If you have questions about this study, please contact us at <u>stanfordpsych251@gmail.com</u>.</p><p>Press the spacebar to begin.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var instructions_training = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>You will see a series of 4 images accompanied by instructions for two emotion regulation strategies: <b>reappraisal</b> and <b>distraction</b></p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var reappraisal_training = {
+        timeline: [{
+          type: 'image-keyboard-response',
+          prompt: '<p><b>Reappraise:</b> Look at the picture and think about it in a way that reduces its negative meaning. Press the spacebar to continue.</p>',
+          stimulus: jsPsych.timelineVariable('training'),
+          response_ends_trial: true
+          }],
+          
+          timeline_variables: [
+        { training: 'iaps/h1.png' },
+        { training: 'iaps/l1.png' }
+        ],
+          randomize_order: true
+      }
+      
+      var distraction_training = {
+        timeline: [{
+          type: 'image-keyboard-response',
+          prompt: '<p><b>Distract:</b> Look at the picture and think about something that is emotionally neutral. Press the spacebar to continue.</p>',
+          stimulus: jsPsych.timelineVariable('training'),
+          response_ends_trial: true
+        }],
+        
+          timeline_variables: [
+        { training: 'iaps/h2.png' },
+        { training: 'iaps/l2.png' }
+        ],
+          randomize_order: true
+      }
+      
+      var instructions_practice_1 = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var practice_1_reappraisal = {
+        timeline: [
+          {
+            type: 'image-keyboard-response',
+            prompt: '<p>Press the spacebar to continue</p>',
+            stimulus: jsPsych.timelineVariable('practice_1_reappraisal'),
+            choices: ' ',
+            stimulus_duration: 500,
+          },
+          {
+           type: 'image-keyboard-response',
+           prompt: '<p>Reappraise</p>', 
+           stimulus: jsPsych.timelineVariable('practice_1_reappraisal'),
+           trial_duration: 5000
+          }
+        ],
+        
+        timeline_variables: [
+        { practice_1_reappraisal: 'iaps/h1.png' },
+        { practice_1_reappraisal: 'iaps/h2.png'}
+        ],
+          randomize_order: true
+      }
+      
+        var practice_1_distraction = {
+        timeline: [
+          {
+            type: 'image-keyboard-response',
+            prompt: '<p>Press the spacebar to continue</p>',
+            stimulus: jsPsych.timelineVariable('practice_1_distraction'),
+            choices: ' ',
+            stimulus_duration: 500,
+          },
+          {
+           type: 'image-keyboard-response',
+           prompt: '<p>Distract</p>', 
+           stimulus: jsPsych.timelineVariable('practice_1_distraction'),
+           trial_duration: 5000
+          }
+        ],
+        
+        timeline_variables: [
+        { practice_1_distraction: 'iaps/l1.png' },
+        { practice_1_distraction: 'iaps/l2.png'}
+        ],
+          randomize_order: true
+      }
+      
+      var instructions_practice_2 = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly and <b>select which regulation strategy to use</b>. You will then see that same image and implement the strategy you chose.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var practice_2 = {
+        timeline: [
+          {
+            type: 'image-button-response',
+            prompt: '<p>View the image above and select one of the two regulation strategies to implement.</p>',
+            stimulus: jsPsych.timelineVariable('practice_2'),
+            choices: ['Reappraise', 'Distract'],
+            stimulus_duration: 500,
+            response_ends_trial: true,
+            margin_vertical: '20px'
+          },
+          {
+           type: 'image-keyboard-response',
+           prompt: '<p>Implement selected strategy.</p>', 
+           stimulus: jsPsych.timelineVariable('practice_2'),
+           trial_duration: 5000,
+          }
+        ],
+        
+        timeline_variables: [
+        { practice_2: 'iaps/h1.png' },
+        { practice_2: 'iaps/h2.png' },
+        { practice_2: 'iaps/l1.png' },
+        { practice_2: 'iaps/l2.png' }
+        ],
+          randomize_order: true
+      }
+      
+      
+      var instructions_experiment = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. You will then see the same images again and implement the strategy you chose.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var experiment = {
+        timeline: [
+          {
+            type: 'image-button-response',
+            prompt: '<p>View the image above and select one of the two regulation strategies to implement.</p>',
+            stimulus: jsPsych.timelineVariable('iaps'),
+            choices: ['Reappraise', 'Distract'],
+            stimulus_duration: 500,
+            response_ends_trial: true,
+            margin_vertical: '20px'
+          },
+          {
+           type: 'image-keyboard-response',
+           prompt: '<p>Implement selected strategy</p>', 
+           stimulus: jsPsych.timelineVariable('iaps'),
+           trial_duration: 5000
+          }
+        ],
+        timeline_variables: [
+        { iaps: 'iaps/h1.png' },
+        { iaps: 'iaps/h2.png' },
+        { iaps: 'iaps/l1.png' },
+        { iaps: 'iaps/l2.png' }
+        ],
+          randomize_order: true
+      }
+      
+        var thank_you = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>Thank you for your participation! Your response has been recorded.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+function save_data() {
+    jQuery.ajax({
+        type: 'post',
+        cache: false,
+        url: 'https://stanford.edu/~kpetrova/cgi-bin/save_data.php',
+        data: {
+            data_dir: 'data',
+            file_name: 'hit_' + subj_ID + '.csv',
+            exp_data: jsPsych.data.get().csv()
+        }
+    })
+}
+
+      jsPsych.init({
+        timeline: [
+          instructions_general, 
+          instructions_training, 
+          reappraisal_training, 
+          distraction_training, 
+          instructions_practice_1,
+          practice_1_reappraisal,
+          practice_1_distraction,
+          instructions_practice_2,
+          practice_2,
+          instructions_experiment, 
+          experiment,
+          thank_you],
+            on_finish: function(){
+        save_data()
+    }
+})
+      
+    </script>
+  </html>
