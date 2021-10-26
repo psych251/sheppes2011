@@ -19,7 +19,7 @@
       
       var instructions_general = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p>No information that could be used to identify you will be collected as part of this study. ...</p><p>Please be aware that the images used in this study contain content that may be unpleasant or disturbing</p><p>If you have questions about this study, please contact us at <u>stanfordpsych251@gmail.com</u>.</p><p>Press the spacebar to begin.</p></center>',
+        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p><b>Please be aware that the images used in this study contain content that may be unpleasant or disturbing.</b></p><p>Your participation will take approximately 8 minutes. You will receive $X.XX as payment for your participation. The risks associated with this study are no greater than the risks one might encounter in everyday life. If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals.  Your individual privacy will be maintained in all published and written data resulting from the study.</p><p>If you have questions about this study, please contact us at <u>stanfordpsych251@gmail.com</u>.</p><p>Press the spacebar to begin.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -34,14 +34,16 @@
       var reappraisal_training = {
         timeline: [{
           type: 'image-keyboard-response',
-          prompt: '<p><b>Reappraise:</b> Look at the picture and think about it in a way that reduces its negative meaning. Press the spacebar to continue.</p>',
+          prompt: '<p><b>Reappraise:</b> Look at the picture and think about it in a way that reduces its negative meaning. Press the spacebar when ready to continue.</p>',
           stimulus: jsPsych.timelineVariable('training'),
-          response_ends_trial: true
+          response_ends_trial: true,
+          stimulus_height: 500,
+          maintain_aspect_ratio: true
           }],
           
           timeline_variables: [
-        { training: 'iaps/h1.png' },
-        { training: 'iaps/l1.png' }
+        { training: 'iaps/3030ht.jpg' },
+        { training: 'iaps/1111lt.jpg' }
         ],
           randomize_order: true
       }
@@ -49,21 +51,23 @@
       var distraction_training = {
         timeline: [{
           type: 'image-keyboard-response',
-          prompt: '<p><b>Distract:</b> Look at the picture and think about something that is emotionally neutral. Press the spacebar to continue.</p>',
+          prompt: '<p><b>Distract:</b> Look at the picture and think about something that is emotionally neutral. Press the spacebar when ready to continue.</p>',
           stimulus: jsPsych.timelineVariable('training'),
-          response_ends_trial: true
+          response_ends_trial: true,
+          stimulus_height: 500,
+          maintain_aspect_ratio: true
         }],
         
           timeline_variables: [
-        { training: 'iaps/h2.png' },
-        { training: 'iaps/l2.png' }
+        { training: 'iaps/2205ht.jpg' },
+        { training: 'iaps/1019lt.jpg' }
         ],
           randomize_order: true
       }
       
       var instructions_practice_1 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image.</p></center>',
+        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -76,18 +80,23 @@
             stimulus: jsPsych.timelineVariable('practice_1_reappraisal'),
             choices: ' ',
             stimulus_duration: 500,
+            stimulus_height: 500,
+            maintain_aspect_ratio: true
           },
           {
            type: 'image-keyboard-response',
            prompt: '<p>Reappraise</p>', 
            stimulus: jsPsych.timelineVariable('practice_1_reappraisal'),
-           trial_duration: 5000
+           trial_duration: 5000,
+           stimulus_height: 500,
+           maintain_aspect_ratio: true,
+           response_ends_trial: false
           }
         ],
         
         timeline_variables: [
-        { practice_1_reappraisal: 'iaps/h1.png' },
-        { practice_1_reappraisal: 'iaps/h2.png'}
+        { practice_1_reappraisal: 'iaps/2703hp.jpg'},
+        { practice_1_reappraisal: 'iaps/2120lp.jpg'}
         ],
           randomize_order: true
       }
@@ -100,25 +109,30 @@
             stimulus: jsPsych.timelineVariable('practice_1_distraction'),
             choices: ' ',
             stimulus_duration: 500,
+           stimulus_height: 500,
+           maintain_aspect_ratio: true
           },
           {
            type: 'image-keyboard-response',
            prompt: '<p>Distract</p>', 
            stimulus: jsPsych.timelineVariable('practice_1_distraction'),
-           trial_duration: 5000
+           trial_duration: 5000,
+           stimulus_height: 500,
+           maintain_aspect_ratio: true,
+           response_ends_trial: false
           }
         ],
         
         timeline_variables: [
-        { practice_1_distraction: 'iaps/l1.png' },
-        { practice_1_distraction: 'iaps/l2.png'}
+        { practice_1_distraction: 'iaps/7521lp.jpg' },
+        { practice_1_distraction: 'iaps/3051jp.jpg'}
         ],
           randomize_order: true
       }
       
       var instructions_practice_2 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly and <b>select which regulation strategy to use</b>. You will then see that same image and implement the strategy you chose.</p></center>',
+        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly and <b>select which regulation strategy to use</b>. You will then see that same image and implement the strategy you chose <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -132,21 +146,26 @@
             choices: ['Reappraise', 'Distract'],
             stimulus_duration: 500,
             response_ends_trial: true,
-            margin_vertical: '20px'
+            margin_vertical: '20px',
+           stimulus_height: 500,
+           maintain_aspect_ratio: true
           },
           {
            type: 'image-keyboard-response',
            prompt: '<p>Implement selected strategy.</p>', 
            stimulus: jsPsych.timelineVariable('practice_2'),
            trial_duration: 5000,
+           stimulus_height: 500,
+           maintain_aspect_ratio: true,
+           response_ends_trial: false
           }
         ],
         
         timeline_variables: [
-        { practice_2: 'iaps/h1.png' },
-        { practice_2: 'iaps/h2.png' },
-        { practice_2: 'iaps/l1.png' },
-        { practice_2: 'iaps/l2.png' }
+        { practice_2: 'iaps/9921hp.jpg' },
+        { practice_2: 'iaps/9145lp.jpg' },
+        { practice_2: 'iaps/8231lp.jpg' },
+        { practice_2: 'iaps/3181hp.jpg' }
         ],
           randomize_order: true
       }
@@ -154,7 +173,7 @@
       
       var instructions_experiment = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. You will then see the same images again and implement the strategy you chose.</p></center>',
+        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. You will then see the same images again and implement the strategy you chose <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -168,20 +187,51 @@
             choices: ['Reappraise', 'Distract'],
             stimulus_duration: 500,
             response_ends_trial: true,
-            margin_vertical: '20px'
+            margin_vertical: '20px',
+           stimulus_height: 500,
+           maintain_aspect_ratio: true
           },
           {
            type: 'image-keyboard-response',
            prompt: '<p>Implement selected strategy</p>', 
            stimulus: jsPsych.timelineVariable('iaps'),
-           trial_duration: 5000
+           trial_duration: 5000,
+           stimulus_height: 500,
+           maintain_aspect_ratio: true,
+           response_ends_trial: false
           }
         ],
         timeline_variables: [
-        { iaps: 'iaps/h1.png' },
-        { iaps: 'iaps/h2.png' },
-        { iaps: 'iaps/l1.png' },
-        { iaps: 'iaps/l2.png' }
+          { iaps:  'iaps/1301l.jpg'	},
+          { iaps: 	'iaps/2053h.JPG'	},
+          { iaps: 	'iaps/2278l.jpg'	},
+          { iaps: 	'iaps/2312l.jpg'	},
+          { iaps: 	'iaps/2490l.JPG'	},
+          { iaps: 	'iaps/2691l.jpg'	},
+          { iaps: 	'iaps/2700l.JPG'	},
+          { iaps: 	'iaps/2800h.JPG'	},
+          { iaps: 	'iaps/3000h.JPG'	},
+          { iaps: 	'iaps/3068h.jpg'	},
+          { iaps: 	'iaps/3140h.JPG'	},
+          { iaps: 	'iaps/3150h.JPG'	},
+          { iaps: 	'iaps/3180h.JPG'	},
+          { iaps: 	'iaps/3230h.JPG'	},
+          { iaps: 	'iaps/3261h.jpg'	},
+          { iaps: 	'iaps/3530h.JPG'	},
+          { iaps: 	'iaps/6010l.JPG'	},
+          { iaps: 	'iaps/6190l.JPG'	},
+          { iaps: 	'iaps/6831h.jpg'	},
+          { iaps: 	'iaps/6836l.jpg'	},
+          { iaps: 	'iaps/7360l.JPG'	},
+          { iaps: 	'iaps/9102l.JPG'	},
+          { iaps: 	'iaps/9120l.JPG'	},
+          { iaps: 	'iaps/9160l.JPG'	},
+          { iaps: 	'iaps/9181h.jpg'	},
+          { iaps: 	'iaps/9252h.jpg'	},
+          { iaps: 	'iaps/9410h.JPG'	},
+          { iaps: 	'iaps/9420h.JPG'	},
+          { iaps: 	'iaps/9440l.JPG'	},
+          { iaps: 	'iaps/9470l.jpg'	}
         ],
           randomize_order: true
       }
