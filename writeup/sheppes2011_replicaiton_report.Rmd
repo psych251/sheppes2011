@@ -240,31 +240,26 @@ Any differences from what was described as the original plan, or "none".
 Link to experiment:
 <https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>
 
-I didn't manage to get access to the full IAPS database by this
-assignment's submission deadline, so, as of Sunday 10/24, the experiment
-was set up with the same 4 images across all training, practice, and
-experimental trials. I expect to get access to the full IAPS during the
-week of 10/25, at which stage I will update my experimental setup as
-follows.
-
 ### Data preparation
 
 Data preparation following the analysis plan.
 
 ```{r data prep pilot a, message=FALSE, warning=FALSE, include=TRUE}
 # Concatenated participant data as input
-pilot_a = read_csv("pilot_a.csv")
+pilot_a = read_csv("pilot_a_all_ids.csv")
 head(pilot_a)
 # Tidying + calculating % reappraisal in two types of trials
 pilot_a_tidy <- pilot_a |>
+  filter(grepl("l.jpg|l.JPG|h.jpg|h.JPG", stimulus)) |>
+  filter(grepl("image-button-response", trial_type)) |>
+  mutate(intensity = ifelse(grepl('l.jpg|l.JPG', stimulus), 'low', 'high')) |>
+  select(!(c(stimulus, key_press, time_elapsed, internal_node_id))) |>
   mutate(reappraisal = grepl("0", button_pressed)) |>
   mutate(distraction = grepl("1", button_pressed)) |>
-  group_by(subj_ID, stimulus) |>
+  group_by(subject, intensity) |>
   summarise(
             percent_reappraisal = ((sum(reappraisal)/(sum(distraction)+sum(reappraisal)))*100),
-            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100)) |>
-  mutate(intensity = factor(stimulus, levels=c(1, 2), labels=c("Low", "High"))) |>
-  select(-stimulus)
+            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100))
 # Tidy data ready for glm
 head(pilot_a_tidy)
 ```
@@ -272,10 +267,10 @@ head(pilot_a_tidy)
 ### Confirmatory analysis
 
 ```{r glm pilot a, include=T, warning=FALSE, message=FALSE, echo = T}
-model_pilot_a <- lmer(percent_reappraisal ~ intensity + (1|subj_ID), pilot_a_tidy)
+model_pilot_a <- lmer(percent_reappraisal ~ intensity + (1|subject), pilot_a_tidy)
 anova(model_pilot_a, test= "F")
-confint(model_pilot_a)
-eta_squared(model_pilot_a)
+#confint(model_pilot_a)
+#eta_squared(model_pilot_a)
 ```
 
 The analyses as specified in the analysis plan.

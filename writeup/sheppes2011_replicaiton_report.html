@@ -11,7 +11,7 @@
 
 <meta name="author" content="Kate Petrova kpetrova@stanford.edu" />
 
-<meta name="date" content="2021-10-24" />
+<meta name="date" content="2021-10-26" />
 
 <title>Reproducibility Report for Study 1 by Sheppes et al (2011, Psychological Science)</title>
 
@@ -249,7 +249,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Reproducibility Report for Study 1 by Sheppes et al (2011, Psychological Science)</h1>
 <h4 class="author">Kate Petrova <a href="mailto:kpetrova@stanford.edu" class="email">kpetrova@stanford.edu</a></h4>
-<h4 class="date">October 24, 2021</h4>
+<h4 class="date">October 26, 2021</h4>
 
 </div>
 
@@ -387,64 +387,54 @@ anova(model1, test= &quot;F&quot;)</code></pre>
 <div id="results-pilot-a" class="section level2">
 <h2>Results Pilot A</h2>
 <p>Link to experiment: <a href="https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html" class="uri">https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html</a></p>
-<p>I didn’t manage to get access to the full IAPS database by this assignment’s submission deadline, so, as of Sunday 10/24, the experiment was set up with the same 4 images across all training, practice, and experimental trials. I expect to get access to the full IAPS during the week of 10/25, at which stage I will update my experimental setup as follows.</p>
 <div id="data-preparation" class="section level3">
 <h3>Data preparation</h3>
 <p>Data preparation following the analysis plan.</p>
 <pre class="r"><code># Concatenated participant data as input
-pilot_a = read_csv(&quot;pilot_a.csv&quot;)
+pilot_a = read_csv(&quot;pilot_a_all_ids.csv&quot;)
 head(pilot_a)</code></pre>
-<pre><code>## # A tibble: 6 × 4
-##   subj_ID stimulus trial_index button_pressed
-##   &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
-## 1 mu893          1          25              0
-## 2 mu893          2          27              1
-## 3 mu893          1          29              0
-## 4 mu893          1          31              1
-## 5 v87bhj         2          25              1
-## 6 v87bhj         2          27              1</code></pre>
+<pre><code>## # A tibble: 6 × 9
+##   rt    stimulus  key_press trial_type trial_index time_elapsed internal_node_id
+##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;           
+## 1 46774 &lt;center&gt;… 32        html-keyb…           0        46776 0.0-0.0         
+## 2 5901  &lt;center&gt;… 32        html-keyb…           1        52678 0.0-1.0         
+## 3 14364 iaps/303… 32        image-key…           2        67046 0.0-2.0-0.0     
+## 4 11733 iaps/111… 32        image-key…           3        78782 0.0-2.0-0.1     
+## 5 9632  iaps/220… 32        image-key…           4        88415 0.0-3.0-0.0     
+## 6 8611  iaps/101… 32        image-key…           5        97028 0.0-3.0-0.1     
+## # … with 2 more variables: subject &lt;chr&gt;, button_pressed &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Tidying + calculating % reappraisal in two types of trials
 pilot_a_tidy &lt;- pilot_a |&gt;
+  filter(grepl(&quot;l.jpg|l.JPG|h.jpg|h.JPG&quot;, stimulus)) |&gt;
+  filter(grepl(&quot;image-button-response&quot;, trial_type)) |&gt;
+  mutate(intensity = ifelse(grepl(&#39;l.jpg|l.JPG&#39;, stimulus), &#39;low&#39;, &#39;high&#39;)) |&gt;
+  select(!(c(stimulus, key_press, time_elapsed, internal_node_id))) |&gt;
   mutate(reappraisal = grepl(&quot;0&quot;, button_pressed)) |&gt;
   mutate(distraction = grepl(&quot;1&quot;, button_pressed)) |&gt;
-  group_by(subj_ID, stimulus) |&gt;
+  group_by(subject, intensity) |&gt;
   summarise(
             percent_reappraisal = ((sum(reappraisal)/(sum(distraction)+sum(reappraisal)))*100),
-            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100)) |&gt;
-  mutate(intensity = factor(stimulus, levels=c(1, 2), labels=c(&quot;Low&quot;, &quot;High&quot;))) |&gt;
-  select(-stimulus)
+            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100))
 # Tidy data ready for glm
 head(pilot_a_tidy)</code></pre>
 <pre><code>## # A tibble: 4 × 4
-## # Groups:   subj_ID [2]
-##   subj_ID percent_reappraisal percent_distraction intensity
-##   &lt;chr&gt;                 &lt;dbl&gt;               &lt;dbl&gt; &lt;fct&gt;    
-## 1 mu893                  66.7                33.3 Low      
-## 2 mu893                   0                 100   High     
-## 3 v87bhj                100                   0   Low      
-## 4 v87bhj                  0                 100   High</code></pre>
+## # Groups:   subject [2]
+##   subject intensity percent_reappraisal percent_distraction
+##   &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt;               &lt;dbl&gt;
+## 1 auxxy   high                     26.7                73.3
+## 2 auxxy   low                     100                   0  
+## 3 j9ech   high                     26.7                73.3
+## 4 j9ech   low                     100                   0</code></pre>
 </div>
 <div id="confirmatory-analysis" class="section level3">
 <h3>Confirmatory analysis</h3>
-<pre class="r"><code>model_pilot_a &lt;- lmer(percent_reappraisal ~ intensity + (1|subj_ID), pilot_a_tidy)
+<pre class="r"><code>model_pilot_a &lt;- lmer(percent_reappraisal ~ intensity + (1|subject), pilot_a_tidy)
 anova(model_pilot_a, test= &quot;F&quot;)</code></pre>
 <pre><code>## Analysis of Variance Table
-##           npar Sum Sq Mean Sq F value
-## intensity    1 6944.4  6944.4  25.003</code></pre>
-<pre class="r"><code>confint(model_pilot_a)</code></pre>
-<pre><code>##                     2.5 %    97.5 %
-## .sig01           0.000000  34.21716
-## .sigma           5.614901  28.90062
-## (Intercept)     62.168431 104.49826
-## intensityHigh -113.265025 -53.40161</code></pre>
-<pre class="r"><code>eta_squared(model_pilot_a)</code></pre>
-<pre><code>## # Effect Size for ANOVA (Type III)
-## 
-## Parameter | Eta2 (partial) |       95% CI
-## -----------------------------------------
-## intensity |           0.95 | [0.00, 1.00]
-## 
-## - One-sided CIs: upper bound fixed at (1).</code></pre>
+##           npar Sum Sq Mean Sq    F value
+## intensity    1 5377.8  5377.8 4.2607e+32</code></pre>
+<pre class="r"><code>#confint(model_pilot_a)
+#eta_squared(model_pilot_a)</code></pre>
 <p>The analyses as specified in the analysis plan.</p>
 <p><em>Side-by-side graph with original graph is ideal here</em></p>
 <p>###Exploratory analyses</p>
