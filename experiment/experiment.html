@@ -1,9 +1,10 @@
 <html>
   <head>
-    <title>Kate Petrova PSYCH 251 2021</title>
+    <title>PSYCH 251 2021 KP</title>
     <script src="jspsych-6/jspsych.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6/plugins/jspsych-survey-text.js"></script>
     <script src="jspsych-6/plugins/jspsych-image-button-response.js"></script>
     <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
     <link rel="stylesheet" href="jspsych-6/css/jspsych.css">
@@ -17,57 +18,82 @@
         subject: subj_ID
       }) 
       
+      var preload = {
+        type: 'preload',
+        auto_preload: true 
+      }
+      
       var instructions_general = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p><b>Please be aware that the images used in this study contain content that may be unpleasant or disturbing.</b></p><p>Your participation will take approximately 8 minutes. You will receive $X.XX as payment for your participation. The risks associated with this study are no greater than the risks one might encounter in everyday life. If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals.  Your individual privacy will be maintained in all published and written data resulting from the study.</p><p>If you have questions about this study, please contact us at <u>stanfordpsych251@gmail.com</u>.</p><p>Press the spacebar to begin.</p></center>',
+        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p><b>Please be aware that the images used in this study contain content that may be unpleasant or disturbing.</b></p><p>Your participation will take approximately 10 minutes. You will receive $2.00 as payment for your participation. By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at <u>stanfordpsych251@gmail.com</u>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. </p><p>Press the spacebar to begin.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
       
       var instructions_training = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will see a series of 4 images accompanied by instructions for two emotion regulation strategies: <b>reappraisal</b> and <b>distraction</b></p></center>',
+        stimulus: '<center><p>In this part of the study, you will read instructions for how to implement two emotion regulaiton strategies: <b>reappraisal</b> and <b>distraction</b>. You will then see a series of 4 images accompanied by instructions for which emotion regulation strategy to use.</p><p>Press the spacebar to continue.</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var instructions_reappraisal = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p><b>Reappraisal</b></p><p>Reappraisal involves attending to the emotional situation, but trying to change the meaning of it. The idea is to think of something to tell yourself about the situation that can help you to feel less negative about it. For example, you could think about the outcome of a situation, such as whatever is going on soon will soon be resolved or that help is on the way. You could also focus on a detail of the situation that may not be as bad as it first seemed.</p><p>When you use reappraisal, please stay focused on the images that you see, and try not to think of random things that make you feel better, but rather to change something about the picture that helps you to feel less negative about it. Please do not think that the picture is fake or a scene from a movie, but find another way to change the meaning.</p><p>Press the spacebar to continue</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
       
       var reappraisal_training = {
-        timeline: [{
-          type: 'image-keyboard-response',
-          prompt: '<p><b>Reappraise:</b> Look at the picture and think about it in a way that reduces its negative meaning. Press the spacebar when ready to continue.</p>',
-          stimulus: jsPsych.timelineVariable('training'),
-          response_ends_trial: true,
-          stimulus_height: 500,
-          maintain_aspect_ratio: true
-          }],
+        timeline: [
+          {
+            type: 'survey-text',
+            preamble: `<img src=iaps/3030ht.jpg style="width:500px;"></img>`,
+            questions: [
+              {prompt: '<p><b>Reappraise:</b> look at the image and think about it in a way that reduces its negative meaning.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
+              ]
+          },
           
-          timeline_variables: [
-        { training: 'iaps/3030ht.jpg' },
-        { training: 'iaps/1111lt.jpg' }
-        ],
-          randomize_order: true
+                    {
+            type: 'survey-text',
+            preamble: `<img src=iaps/2457lt.jpg style="width:500px;"></img>`,
+            questions: [
+              {prompt: '<p><b>Reappraise:</b> look at the image and think about it in a way that reduces its negative meaning.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
+              ]
+          }
+          ]
       }
       
+            var instructions_distraction = {
+              type: 'html-keyboard-response',
+              stimulus: '<center><p><b>Distraction</b></p><p>Distraction involves focusing thoughts and attention on something that is completely unrelated to the emotional situation.The idea is to try and feel less negative by thinking of something that is neutral and completely unrelated. There are a few ways that you can use distraction to change the way that you feel. For example, you might imagine yourself doing everyday tasks, such as going for a walk or making a hot drink.</p><p>When you use distraction, please stay focused on the image and do not avert your gaze. Please do not think of something highly emotional, rather think of something that is emotionally neutral and relatively mundane that will keep your mind distracted from what you can see on the screen.</p><p>Press the spacebar to continue</p></center>',
+              choices: ' ',
+              response_ends_trial: true
+            }
+      
       var distraction_training = {
-        timeline: [{
-          type: 'image-keyboard-response',
-          prompt: '<p><b>Distract:</b> Look at the picture and think about something that is emotionally neutral. Press the spacebar when ready to continue.</p>',
-          stimulus: jsPsych.timelineVariable('training'),
-          response_ends_trial: true,
-          stimulus_height: 500,
-          maintain_aspect_ratio: true
-        }],
-        
-          timeline_variables: [
-        { training: 'iaps/2205ht.jpg' },
-        { training: 'iaps/1019lt.jpg' }
-        ],
-          randomize_order: true
+                timeline: [
+          {
+            type: 'survey-text',
+            preamble: `<img src=iaps/2205ht.jpg style="width:500px;"></img>`,
+            questions: [
+              {prompt: '<p><b>Distract:</b> look at the image and think about something that is emotionally neutral.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
+              ]
+          },
+          
+                    {
+            type: 'survey-text',
+            preamble: `<img src=iaps/3022lt.jpg style="width:500px;"></img>`,
+            questions: [
+              {prompt: '<p><b>Distract:</b> look at the image and think about something that is emotionally neutral.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
+              ]
+          }
+          ]
       }
       
       var instructions_practice_1 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
+        stimulus: '<center><p>We would now like you to practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image. <b>Please look at the image for the entire time that it appears on the screen. After the time is up, the next image will appear automatically.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -91,8 +117,14 @@
            stimulus_height: 500,
            maintain_aspect_ratio: true,
            response_ends_trial: false
+          },
+          {
+          type: 'html-keyboard-response',
+          stimulus: '<div style="font-size:60px;">+</div>',
+          choices: "NO_KEYS",
+          trial_duration: 1000
           }
-        ],
+      ],
         
         timeline_variables: [
         { practice_1_reappraisal: 'iaps/2703hp.jpg'},
@@ -120,19 +152,25 @@
            stimulus_height: 500,
            maintain_aspect_ratio: true,
            response_ends_trial: false
+          },
+          {
+          type: 'html-keyboard-response',
+          stimulus: '<div style="font-size:60px;">+</div>',
+          choices: "NO_KEYS",
+          trial_duration: 1000
           }
         ],
         
         timeline_variables: [
         { practice_1_distraction: 'iaps/7521lp.jpg' },
-        { practice_1_distraction: 'iaps/3051jp.jpg'}
+        { practice_1_distraction: 'iaps/3051hp.jpg'}
         ],
           randomize_order: true
       }
       
       var instructions_practice_2 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will now practice using the two strategies you just learned. You will see an image presented briefly and <b>select which regulation strategy to use</b>. You will then see that same image and implement the strategy you chose <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
+        stimulus: '<center><p>We would now like you to practice choosing between the two strategies you just learned. You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. When you are choosing which strategy to use to change the way that you feel about each picture, please take as much time as you need to make your choice. We would like you to pick the strategy that will help you to control your emotions - consider which of the strategies will make you feel less negative. There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -158,6 +196,12 @@
            stimulus_height: 500,
            maintain_aspect_ratio: true,
            response_ends_trial: false
+          },
+          {
+          type: 'html-keyboard-response',
+          stimulus: '<div style="font-size:60px;">+</div>',
+          choices: "NO_KEYS",
+          trial_duration: 1000
           }
         ],
         
@@ -173,7 +217,7 @@
       
       var instructions_experiment = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. You will then see the same images again and implement the strategy you chose <b>for 5 seconds. Please look at the image for the entire time that it appears on the screen. After the 5 seconds are up, the next image will appear automatically.</b></p></center>',
+        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. When you are choosing which strategy to use to change the way that you feel about each picture, please take as much time as you need to make your choice. We would like you to pick the strategy that will help you to control your emotions - consider which of the strategies will make you feel less negative. There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -199,6 +243,12 @@
            stimulus_height: 500,
            maintain_aspect_ratio: true,
            response_ends_trial: false
+          },
+          {
+          type: 'html-keyboard-response',
+          stimulus: '<div style="font-size:60px;">+</div>',
+          choices: "NO_KEYS",
+          trial_duration: 1000
           }
         ],
         timeline_variables: [
@@ -236,14 +286,17 @@
           randomize_order: true
       }
       
-        var thank_you = {
-        type: 'html-keyboard-response',
-        stimulus: '<center><p>Thank you for your participation! Your response has been recorded.</p></center>',
-        choices: ' ',
-        response_ends_trial: true
+      var demographics = {
+        type: 'survey-text',
+        questions: [
+          {prompt: 'How old are you', name: 'Age'},
+          {prompt: 'What is your gender', name: 'Gender'},
+          {prompt: 'Are there any additional comments you wish to share with the research team? (optional)', name: 'Comments'}
+          ]
       }
       
-function save_data() {
+            
+      function save_data() {
     jQuery.ajax({
         type: 'post',
         cache: false,
@@ -260,7 +313,9 @@ function save_data() {
         timeline: [
           instructions_general, 
           instructions_training, 
+          instructions_reappraisal,
           reappraisal_training, 
+          instructions_distraction,
           distraction_training, 
           instructions_practice_1,
           practice_1_reappraisal,
@@ -269,9 +324,11 @@ function save_data() {
           practice_2,
           instructions_experiment, 
           experiment,
-          thank_you],
+          demographics],
             on_finish: function(){
         save_data()
+        document.body.innerHTML = '<p>Thank you for your participation! Please <b>DO NOT LEAVE THIS PAGE!</b> You will be redirected back to Prolific to complete your participation <b>in 5 seconds.</b></p>'
+        setTimeout(function () { location.href = "https://app.prolific.co/submissions/complete?cc=77808FCA" }, 5000)
     }
 })
       

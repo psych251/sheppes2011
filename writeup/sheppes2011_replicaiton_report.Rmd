@@ -186,11 +186,9 @@ confint(model1)
 eta_squared(model1)
 ```
 
-**Exclusion criteria.** Participants who fail the attention check at the
-end of the study will be excluded from analyses (participants will be
-presented with 9 images: 5 that appeared as part of the experiment and 4
-that did not, and asked to select the images that were part of the
-experiment.)
+**Exclusion criteria.** Participants whose responses to open-ended
+questions during the training phase of the study indicate failure to
+follow the instructions will be excluded from analyses.
 
 **Clarify key analysis of interest here** One-way repeated-measures
 ANOVA.
@@ -211,7 +209,11 @@ ANOVA.
     experimenter to provide corrective feedback, it is possible that
     some participants may fail to apply distraction and reappraisal
     correctly, which could lead to a smaller effect size in this
-    replication compared to the original study.
+    replication compared to the original study. To ensure compliance,
+    participants will be asked to *write down* their approach to
+    implementing the two strategies during the 4 training trials.
+    Participants whose responses indicate failure to follow the
+    instructions will be excluded from analyses.
 3.  Finally, unlike in the original experiment, participants in the
     present study will not be videotaped to ensure that they are viewing
     the stimuli without diverting their gaze for the entire duration of
@@ -246,7 +248,7 @@ Data preparation following the analysis plan.
 
 ```{r data prep pilot a, message=FALSE, warning=FALSE, include=TRUE}
 # Concatenated participant data as input
-pilot_a = read_csv("pilot_a_all_ids.csv")
+pilot_a = read_csv("pilot_a_rawdata/pilot_a.csv")
 head(pilot_a)
 # Tidying + calculating % reappraisal in two types of trials
 pilot_a_tidy <- pilot_a |>
@@ -273,13 +275,99 @@ anova(model_pilot_a, test= "F")
 #eta_squared(model_pilot_a)
 ```
 
-The analyses as specified in the analysis plan.
+```{r plot pilot a, include=T, warning=FALSE, message=FALSE, echo = T}
+library(patchwork)
 
-*Side-by-side graph with original graph is ideal here*
+reappraisal_plot <- ggplot(pilot_a_tidy, 
+       aes(x="", 
+           y=percent_reappraisal, 
+           fill=intensity)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  labs(title = "Reappraisal") +
+  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  theme_void()
+  
+distraction_plot <- ggplot(pilot_a_tidy, 
+       aes(x="", 
+           y=percent_distraction, 
+           fill=intensity)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  labs(title = "Distraction")  +
+  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  theme_void()
+  
+reappraisal_plot + distraction_plot + plot_layout(ncol=2)
+```
 
-###Exploratory analyses
+## Results Pilot B
 
-Any follow-up analyses desired (not required).
+Link to experiment:
+[<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
+
+### Data preparation
+
+Data preparation following the analysis plan.
+
+```{r data prep pilot b, message=FALSE, warning=FALSE, include=TRUE}
+# Concatenated participant data as input
+pilot_b = read_csv("pilot_b_rawdata/pilot_b.csv")
+head(pilot_b)
+# Tidying + calculating % reappraisal in two types of trials
+pilot_b_tidy <- pilot_b |>
+  filter(grepl("l.jpg|l.JPG|h.jpg|h.JPG", stimulus)) |>
+  filter(grepl("image-button-response", trial_type)) |>
+  mutate(intensity = ifelse(grepl('l.jpg|l.JPG', stimulus), 'low', 'high')) |>
+  select(!(c(stimulus, key_press, time_elapsed, internal_node_id))) |>
+  mutate(reappraisal = grepl("0", button_pressed)) |>
+  mutate(distraction = grepl("1", button_pressed)) |>
+  group_by(subject, intensity) |>
+  summarise(
+            percent_reappraisal = ((sum(reappraisal)/(sum(distraction)+sum(reappraisal)))*100),
+            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100))
+# Tidy data ready for glm
+head(pilot_b_tidy)
+```
+
+### Confirmatory analysis
+
+```{r glm pilot b, include=T, warning=FALSE, message=FALSE, echo = T}
+model_pilot_b <- lmer(percent_reappraisal ~ intensity + (1|subject), pilot_b_tidy)
+anova(model_pilot_b, test= "F")
+confint(model_pilot_b)
+eta_squared(model_pilot_b)
+```
+
+```{r plot pilot b, include=T, warning=FALSE, message=FALSE, echo = T}
+library(patchwork)
+
+reappraisal_plot <- ggplot(pilot_b_tidy, 
+       aes(x="", 
+           y=percent_reappraisal, 
+           fill=intensity)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  labs(title = "Reappraisal") +
+  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  theme_void()
+  
+distraction_plot <- ggplot(pilot_b_tidy, 
+       aes(x="", 
+           y=percent_distraction, 
+           fill=intensity)) +
+  geom_bar(stat="identity", width=1) +
+  coord_polar("y", start=0) +
+  labs(title = "Distraction")  +
+  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  theme_void()
+  
+reappraisal_plot + distraction_plot + plot_layout(ncol=2)
+```
 
 ## Discussion
 
