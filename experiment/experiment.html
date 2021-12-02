@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>PSYCH 251 2021 KP</title>
+    <title>Emotion regulation</title>
     <script src="jspsych-6/jspsych.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
@@ -18,28 +18,32 @@
         subject: subj_ID
       }) 
       
-      var preload = {
-        type: 'preload',
-        auto_preload: true 
-      }
+      var images = ['iaps/9921hp.jpg', 'iaps/9145lp.jpg', 'iaps/8231lp.jpg', 'iaps/7521lp.jpg', 'iaps/6940ht.jpg', 'iaps/3181hp.jpg', 'iaps/3022lt.jpg','iaps/3030ht.jpg', 'iaps/3051hp.jpg', 'iaps/2703hp.jpg', 'iaps/2457lt.jpg', 'iaps/2455ht.jpg', 'iaps/2205ht.jpg', 'iaps/2120lp.jpg', 'iaps/3068h.jpg', 'iaps/2278l.jpg', 'iaps/6836l.jpg', 'iaps/9470l.jpg', 'iaps/9102l.JPG', 'iaps/9181h.jpg', 'iaps/9252h.jpg', 'iaps/9410h.JPG', 'iaps/9420h.JPG', 'iaps/9440l.JPG', 'iaps/9120l.JPG', 'iaps/9160l.JPG', 'iaps/7360l.JPG', 'iaps/6831h.jpg', 'iaps/6010l.JPG', 'iaps/6190l.JPG', 'iaps/3530h.JPG', 'iaps/3261h.jpg', 'iaps/2800h.JPG', 'iaps/3140h.JPG', 'iaps/3150h.JPG', 'iaps/3180h.JPG', 'iaps/3230h.JPG', 'iaps/3000h.JPG', 'iaps/2490l.JPG', 'iaps/2700l.JPG', 'iaps/2691l.jpg', 'iaps/2053h.JPG', 'iaps/1301l.jpg', 'iaps/2312l.jpg'];
       
       var instructions_general = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p><b>Please be aware that the images used in this study contain content that may be unpleasant or disturbing.</b></p><p>Your participation will take approximately 10 minutes. You will receive $2.00 as payment for your participation. By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at <u>stanfordpsych251@gmail.com</u>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. </p><p>Press the spacebar to begin.</p></center>',
+        stimulus: '<center><p>In this study, you will be trained to use two emotion regulation strategies. You will then practice using these strategies while viewing a series of images.</p><p><b>Please be aware that the images used in this study contain content that may be unpleasant or disturbing.</b></p><p>Your participation will take approximately 10 minutes. You will receive $2.00 as payment for your participation. <b>You must use a desktop or a laptop computer to complete this study. </b> By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at <u>stanfordpsych251@gmail.com</u>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you. </p><p>Press the spacebar to begin.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
       
       var instructions_training = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>In this part of the study, you will read instructions for how to implement two emotion regulaiton strategies: <b>reappraisal</b> and <b>distraction</b>. You will then see a series of 4 images accompanied by instructions for which emotion regulation strategy to use.</p><p>Press the spacebar to continue.</p></center>',
+        stimulus: '<center><p>In this part of the study, you will view a series of pictures and try to change how you feel about each picture by changing the way you think about it. Some pictures might make you feel very negative, while other pictures might make you feel slightly negative or not negative at all. You will be able to choose between two ways or strategies that will help you feel less negative. The next section will explain both strategies and give you the opportunity to practice implementing them. It is important that you try to remember what you are supposed to do in each strategy.</p><p>Press the spacebar to continue.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
       
       var instructions_reappraisal = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p><b>Reappraisal</b></p><p>Reappraisal involves attending to the emotional situation, but trying to change the meaning of it. The idea is to think of something to tell yourself about the situation that can help you to feel less negative about it. For example, you could think about the outcome of a situation, such as whatever is going on soon will soon be resolved or that help is on the way. You could also focus on a detail of the situation that may not be as bad as it first seemed.</p><p>When you use reappraisal, please stay focused on the images that you see, and try not to think of random things that make you feel better, but rather to change something about the picture that helps you to feel less negative about it. Please do not think that the picture is fake or a scene from a movie, but find another way to change the meaning.</p><p>Press the spacebar to continue</p></center>',
+        stimulus: '<center><p>The first strategy is called REAPPRAISAL. This means that you attend to the picture and try to change the meaning of it. That means you think of something to tell yourself about the picture that helps you feel less negative about it. For example, you could tell yourself something about the outcome of the picture, that whatever is going on will soon be resolved, or that help is on the way. You could also focus on a specific detail of the situation that may not be as bad as it first seemed. But we want you to stay focused on the picture and not think of random things that will make you feel better, but rather to change something about the picture that helps you to feel less negative about it. It is very important that when you reappraise you do not think that the picture is fake or a scene from a movie. Think of it as a real situation, and then change the meaning of it. <b>Once again, as soon as the picture is on the screen, keep focusing on the picture, but tell yourself something about it that makes you feel less negative; keep repeating it to yourself while the screen is up.</b></p><p>Press the spacebar to continue</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
+      
+      var cue_reappraisal = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>Now you are going to practice using reappraisal. Once the picture comes up on the screen, please immediately start focusing your thoughts with the goal of feeling less negative, <b>Focus on the picture but think of the meaning of the picture in a way that will help you feel less negative about it.</b></p><p>Press the spacebar to continue</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -48,11 +52,17 @@
         timeline: [
           {
             type: 'survey-text',
-            preamble: `<img src=iaps/3030ht.jpg style="width:500px;"></img>`,
+            preamble: `<img src=iaps/6940ht.jpg style="width:500px;"></img>`,
             questions: [
-              {prompt: '<p><b>Reappraise:</b> look at the image and think about it in a way that reduces its negative meaning.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
+              {prompt: '<p><b>Reappraise:</b> look at the picture and think about it in a way that reduces its negative meaning.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
               ]
           },
+          {
+          type: 'html-keyboard-response',
+          stimulus: '<center><p>Just to give you more ideas, other people thought that they are fighting for their families, they are protecting their country, they stand together for an important goal, their families will be proud of them.</p><p><b>Remember, as soon as the picture is on the screen, keep focusing on the picture but tell yourself something about it that makes you feel less negative, until it disappears from the screen.</b></p><p>Press the spacebar to continue</p></center>',
+              choices: ' ',
+              response_ends_trial: true
+            },
           
                     {
             type: 'survey-text',
@@ -66,20 +76,33 @@
       
             var instructions_distraction = {
               type: 'html-keyboard-response',
-              stimulus: '<center><p><b>Distraction</b></p><p>Distraction involves focusing thoughts and attention on something that is completely unrelated to the emotional situation.The idea is to try and feel less negative by thinking of something that is neutral and completely unrelated. There are a few ways that you can use distraction to change the way that you feel. For example, you might imagine yourself doing everyday tasks, such as going for a walk or making a hot drink.</p><p>When you use distraction, please stay focused on the image and do not avert your gaze. Please do not think of something highly emotional, rather think of something that is emotionally neutral and relatively mundane that will keep your mind distracted from what you can see on the screen.</p><p>Press the spacebar to continue</p></center>',
+              stimulus: '<center><p>The second strategy is called DISTRACTION. This means that you try your best to feel less negative about the picture by thinking of something that is completely unrelated to the picture. There are a few ways you can do this. First, you can think about geometric shapes. For instance, if you see a bloody knife, you can think of a big yellow triangle. Second, you can imagine yourself doing everyday tasks, such as taking a shower or making coffee in the morning. Third, you can imagine your neighborhood or other familiar streets. You could use any one of these ways to distract yourself, which you think will work best in making you feel less negative. You do not have to use the same method to distract all the time. <b>However, it is important that you keep your eyes on the picture and not avert your gaze. As soon as the picture is on the screen, start focusing all of your thoughts on something that is completely unrelated to the picture. Once you have come up with a way to feel less negative, keep repeating it to yourself while the screen is up.</b></p><p>Press the spacebar to continue</p></center>',
               choices: ' ',
               response_ends_trial: true
             }
+            
+      var cue_distraction = {
+        type: 'html-keyboard-response',
+        stimulus: '<center><p>Now you are going to practice using distraction. Once the picture comes up on the screen, please immediately start focusing and implementing that strategy.</p><p>Press the spacebar to continue</p></center>',
+        choices: ' ',
+        response_ends_trial: true
+      }
       
       var distraction_training = {
                 timeline: [
           {
             type: 'survey-text',
-            preamble: `<img src=iaps/2205ht.jpg style="width:500px;"></img>`,
+            preamble: `<img src=iaps/2455ht.jpg style="width:500px;"></img>`,
             questions: [
               {prompt: '<p><b>Distract:</b> look at the image and think about something that is emotionally neutral.</p><p>In the box below, please describe how you used this strategy</p>', rows: 3}
               ]
           },
+          {
+            type: 'html-keyboard-response',
+            stimulus: '<center><p>Just to give you more ideas, other people thought of cars passing on a street they know, or about all the steps of making coffee, or about a red triangle. <b>Remember, the moment you see the picture on the screen, start focusing all your thoughts on the distracting object you chose.</b></p><p>Press the spacebar to continue</p></center>',
+            choices: ' ',
+            response_ends_trial: true
+            },
           
                     {
             type: 'survey-text',
@@ -93,7 +116,7 @@
       
       var instructions_practice_1 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>We would now like you to practice using the two strategies you just learned. You will see an image presented briefly. You will then see that same image and implement the strategy that is written under the image. <b>Please look at the image for the entire time that it appears on the screen. After the time is up, the next image will appear automatically.</b></p></center>',
+        stimulus: '<center><p>We would now like you to practice using the two strategies you just learned. First, you will see a fixation cross. Please just attend to it. Then, a picture will flash on the screen for a very brief period of time. Follow the instructions on the screen. The same picture that you saw briefly will then appear for an extended time. As soon as you see it, start implementing the strategy that is written under the picture. <b>Please look at the image for the entire time that it appears on the screen. After the time is up, the next image will appear automatically.</b></p><p>Press the spacebar to continue.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -170,7 +193,7 @@
       
       var instructions_practice_2 = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>We would now like you to practice choosing between the two strategies you just learned. You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. When you are choosing which strategy to use to change the way that you feel about each picture, please take as much time as you need to make your choice. We would like you to pick the strategy that will help you to control your emotions - consider which of the strategies will make you feel less negative. There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p></center>',
+        stimulus: '<center><p>In this task, we want you to <b>choose</b> between the two strategies that you just learned for each picture that you see. Like in the previous part of the study, you will see a fixation cross. Please just attend to it. Then, a picture will flash on the screen for a very brief period of time. You will then <b>select which regulation strategy to use</b> using buttons at the bottom of the screen. As soon as you select the strategy, the same picture that you saw briefly will then appear for an extended time. As soon as you see it, start implementing the strategy that you selected.</p><p>There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p><p>Press the spacebar to continue</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -217,7 +240,7 @@
       
       var instructions_experiment = {
         type: 'html-keyboard-response',
-        stimulus: '<center><p>You will see a series of images presented briefly and <b>select which regulation strategy to use for each image</b>. When you are choosing which strategy to use to change the way that you feel about each picture, please take as much time as you need to make your choice. We would like you to pick the strategy that will help you to control your emotions - consider which of the strategies will make you feel less negative. There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p></center>',
+        stimulus: '<center><p>You will now see a series of pictures and choose between the two strategies, exactly as you did in the previous task. Again, you will first see a fixation cross. Please just attend to it. Then, a picture will flash on the screen for a very brief period of time. You will then <b>select which regulation strategy to use</b> using buttons at the bottom of the screen. As soon as you select the strategy, the same picture that you saw briefly will then appear for an extended time. As soon as you see it, start implementing the strategy that you selected.</p><p>There are no right or wrong answers, so do not be concerned about keeping a balance between your choices. You can choose whatever strategies you want during the task. This is completely your choice. Consider both strategies and pick the one that you think will make you feel less negative. Make your choice and start controlling your emotions when you see the image appear again. <b>It is important that you keep your eyes on the picture and not avert your gaze.</b></p><p>Press the spacebar to continue.</p></center>',
         choices: ' ',
         response_ends_trial: true
       }
@@ -290,8 +313,7 @@
         type: 'survey-text',
         questions: [
           {prompt: 'How old are you', name: 'Age'},
-          {prompt: 'What is your gender', name: 'Gender'},
-          {prompt: 'Are there any additional comments you wish to share with the research team? (optional)', name: 'Comments'}
+          {prompt: 'What is your gender', name: 'Gender'}
           ]
       }
       
@@ -310,12 +332,15 @@
 }
 
       jsPsych.init({
+        preload_images:images,
         timeline: [
           instructions_general, 
           instructions_training, 
           instructions_reappraisal,
+          cue_reappraisal,
           reappraisal_training, 
           instructions_distraction,
+          cue_distraction,
           distraction_training, 
           instructions_practice_1,
           practice_1_reappraisal,

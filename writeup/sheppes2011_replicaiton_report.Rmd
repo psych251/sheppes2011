@@ -306,7 +306,7 @@ reappraisal_plot + distraction_plot + plot_layout(ncol=2)
 ## Results Pilot B
 
 Link to experiment:
-[<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
+[\<https://web.stanford.edu/\~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
 
 ### Data preparation
 
