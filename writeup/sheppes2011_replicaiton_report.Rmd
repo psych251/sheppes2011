@@ -17,6 +17,8 @@ editor_options:
 
 ## Introduction
 
+### Background
+
 How do people decide which emotion regulation strategy to use in any
 given situation? A series of experiments reported by Sheppes et al
 (2011) provides evidence that individuals' choice of emotion regulation
@@ -42,13 +44,9 @@ experimental paradigm for online contexts.
 ### Anticipated challenges
 
 The absence of corrective feedback during the training and practice
-phases presents a potential challenge for this replication attempt.
-Screening participants for attention before letting them begin the study
-is one way of ensuring that participants follow the instructions rather
-than passively view the stimuli. Including more detailed written
-instructions for implementing distraction and reappraisal during the
-training and practice phases will also help maximize correct
-implementation of the two strategies.
+phases presents a potential challenge for this replication attempt. Ways
+of addressing this challenge in the present replication attempt are
+described in detail in the Methods section of this report.
 
 ### Links
 
@@ -57,6 +55,11 @@ Project repository (on Github):
 
 Original paper (as hosted in your repo):
 <https://github.com/psych251/sheppes2011/blob/main/original_paper/sheppes2011.pdf>
+
+Preregistration: <https://osf.io/uzw4q/>
+
+Experiment (same for pilot a, pilot b, and final replication):
+[<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
 
 ## Methods
 
@@ -128,20 +131,20 @@ of the original paper.
 The procedures outlined in the Method section of the original study will
 be followed with a few necessary deviations (see below). </br> </br>
 **1. Training phase.** Participants will be instructed to look at 4
-images (2 low-intensity and 2 high-intensity) while implementing one of
-two regulatory strategies: </br> </br> Distraction: thinking about
-something that is emotionally neutral (2 trials; 1 low-intensity, 1
-high-intensity). </br> Reappraisal: thinking about an image in a way
-that reduces its negative meaning (2 trials; 1 low-intensity, 1
-high-intensity). </br> </br> **2. Practice phase.** Participants will
-complete 8 practice trials: 4 trials with have pre-determined regulation
-strategy (one trial for each strategy at each intensity level) and 4
-trials with participants freely choosing which strategy to use. </br>
-</br> **3. Experimental phase.** Participants will view 30 images for
-500ms and choose one of two regulation strategies to implement for each
-image. They will then view each image for 5,000ms while implementing the
-chosen strategy. The same 30 images that were used in the original study
-by Sheppes et al (2011) will be used
+images while implementing one of two regulatory strategies: </br> </br>
+Distraction: thinking about something that is emotionally neutral (2
+trials; 1 low-intensity, 1 high-intensity). </br> Reappraisal: thinking
+about an image in a way that reduces its negative meaning (2 trials; 1
+low-intensity, 1 high-intensity). </br> </br> **2. Practice phase.**
+Participants will complete 8 practice trials: 4 trials with have
+pre-determined regulation strategy (one trial for each strategy at each
+intensity level) and 4 trials with participants freely choosing which
+strategy to use. </br> </br> **3. Experimental phase.** Participants
+will view 30 images for 500ms and choose one of two regulation
+strategies to implement for each image. They will then view each image
+for 5,000ms while implementing the chosen strategy. The same 30 images
+that were used in the original study by Sheppes et al (2011) will be
+used
 
 ### Analysis Plan
 
@@ -193,6 +196,12 @@ follow the instructions will be excluded from analyses.
 **Clarify key analysis of interest here** One-way repeated-measures
 ANOVA.
 
+**Reproducibility criteria.** Given the potential challenges associated
+with implementing this experiment online, a large effect (partial eta
+squared \> .14) of emotional intensity on emotion regulation choice in
+the expected direction will be sufficient to consider this replication
+attempt successful.
+
 ### Differences from Original Study
 
 1.  Unlike in the original study that was performed in a sample of
@@ -211,7 +220,7 @@ ANOVA.
     correctly, which could lead to a smaller effect size in this
     replication compared to the original study. To ensure compliance,
     participants will be asked to *write down* their approach to
-    implementing the two strategies during the 4 training trials.
+    implementing the two strategies during two of the training trials.
     Participants whose responses indicate failure to follow the
     instructions will be excluded from analyses.
 3.  Finally, unlike in the original experiment, participants in the
@@ -225,24 +234,37 @@ ANOVA.
 
 ### Methods Addendum (Post Data Collection)
 
-You can comment this section out prior to final report with data
-collection.
-
 #### Actual Sample
 
-Sample size, demographics, data exclusions based on rules spelled out in
-analysis plan
+Twenty participants were recruited online via Prolific and compensated
+at the rate of \$12/hour for their participation. Participants age
+ranged from 20 on the low end to 58 on the high end (*M* = 30.83, *SD* =
+12.29). A total of 17 participants (85%) identified as female, 2 (10%)
+as male, as 1 (5%) as non-binary. In accordance with the *a priori*
+defined exclusion criteria, 3 participants were excluded because their
+responses to at least one of the two open-ended questions (asking them
+to describe how exactly they implemented reappraisal and distraction)
+indicated a clear failure to follow the emotion regulation instructions.
+Specifically, one of the excluded sparticipant simply described the
+image stimuli instead of regulating their emotions, and two additional
+participants described using distraction after being instructed to use
+reappraisal. These exclusions brought the final sample size down to 17
+participants, which exceeds the minimum number of participants (7)
+needed to detect a large effect size with 95% power.
 
 #### Differences from pre-data collection methods plan
 
-Any differences from what was described as the original plan, or "none".
+None.
 
-## Results Pilot A
+## Results 
 
-Link to experiment:
-<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>
+### Pilot A
 
-### Data preparation
+#### Participants.
+
+Two non-naive participants.
+
+#### Data preparation
 
 Data preparation following the analysis plan.
 
@@ -266,7 +288,7 @@ pilot_a_tidy <- pilot_a |>
 head(pilot_a_tidy)
 ```
 
-### Confirmatory analysis
+#### Confirmatory analysis
 
 ```{r glm pilot a, include=T, warning=FALSE, message=FALSE, echo = T}
 model_pilot_a <- lmer(percent_reappraisal ~ intensity + (1|subject), pilot_a_tidy)
@@ -275,40 +297,13 @@ anova(model_pilot_a, test= "F")
 #eta_squared(model_pilot_a)
 ```
 
-```{r plot pilot a, include=T, warning=FALSE, message=FALSE, echo = T}
-library(patchwork)
+### Pilot B
 
-reappraisal_plot <- ggplot(pilot_a_tidy, 
-       aes(x="", 
-           y=percent_reappraisal, 
-           fill=intensity)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0) +
-  labs(title = "Reappraisal") +
-  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  theme_void()
-  
-distraction_plot <- ggplot(pilot_a_tidy, 
-       aes(x="", 
-           y=percent_distraction, 
-           fill=intensity)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0) +
-  labs(title = "Distraction")  +
-  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  theme_void()
-  
-reappraisal_plot + distraction_plot + plot_layout(ncol=2)
-```
+#### Participants.
 
-## Results Pilot B
+Three participants recruited via Prolific.
 
-Link to experiment:
-[\<https://web.stanford.edu/\~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
-
-### Data preparation
+#### Data preparation
 
 Data preparation following the analysis plan.
 
@@ -332,7 +327,7 @@ pilot_b_tidy <- pilot_b |>
 head(pilot_b_tidy)
 ```
 
-### Confirmatory analysis
+#### Confirmatory analysis
 
 ```{r glm pilot b, include=T, warning=FALSE, message=FALSE, echo = T}
 model_pilot_b <- lmer(percent_reappraisal ~ intensity + (1|subject), pilot_b_tidy)
@@ -341,50 +336,119 @@ confint(model_pilot_b)
 eta_squared(model_pilot_b)
 ```
 
+### Final replication results
+
+#### Data preparation following the analysis plan.
+
+```{r data prep final, message=FALSE, warning=FALSE, include=TRUE}
+# Concatenated participant data as input
+rep_data = read_csv("replication_rawdata/replication_data.csv")
+head(rep_data)
+# Tidying + calculating % reappraisal in two types of trials
+rep_data_tidy <- rep_data |>
+  filter(grepl("l.jpg|l.JPG|h.jpg|h.JPG", stimulus)) |>
+  filter(grepl("image-button-response", trial_type)) |>
+  mutate(intensity = ifelse(grepl('l.jpg|l.JPG', stimulus), 'low', 'high')) |>
+  select(!(c(stimulus, key_press, time_elapsed, internal_node_id))) |>
+  mutate(reappraisal = grepl("0", button_pressed)) |>
+  mutate(distraction = grepl("1", button_pressed)) |>
+  group_by(subject, intensity) |>
+  summarise(
+            percent_reappraisal = ((sum(reappraisal)/(sum(distraction)+sum(reappraisal)))*100),
+            percent_distraction = ((sum(distraction)/(sum(distraction)+sum(reappraisal)))*100))
+# Tidy data ready for glm
+head(rep_data_tidy)
+
+# Excluding participants who did not follow instructions for at least one of the two emotion regulation strategies (N = 3)
+rep_data_tidy_N17 <- rep_data_tidy |>
+  filter(subject != "gy0bq" & subject != "m821x" & subject != "qz80b")
+```
+
+#### Confirmatory analysis
+
+```{r glm final replication, include=T, warning=FALSE, message=FALSE, echo = T}
+model_replication <- lmer(percent_reappraisal ~ intensity + (1|subject),  rep_data_tidy_N17)
+anova(model_replication, test = "F")
+summary(model_replication)
+confint(model_replication)
+eta_squared(model_replication)
+```
+
 ```{r plot pilot b, include=T, warning=FALSE, message=FALSE, echo = T}
 library(patchwork)
+# Re-arranging data for plot
+rep_data_for_plot <- rep_data |>
+  filter(subject != "gy0bq" & subject != "m821x" & subject != "qz80b") |>
+  filter(grepl("l.jpg|l.JPG|h.jpg|h.JPG", stimulus)) |>
+  filter(grepl("image-button-response", trial_type)) |>
+  mutate(low_intensity = grepl('l.jpg|l.JPG', stimulus)) |>
+  mutate(high_intensity = grepl('h.jpg|h.JPG', stimulus)) |>
+  select(!(c(stimulus, key_press, time_elapsed, internal_node_id))) |>
+  mutate(Strategy = ifelse(grepl("0", button_pressed), "reappraisal", "distraction")) |>
+  group_by(subject, Strategy) |>
+  summarise(
+            percent_low = ((sum(low_intensity)/(sum(high_intensity)+sum(low_intensity)))*100),
+            percent_high = ((sum(high_intensity)/(sum(high_intensity)+sum(low_intensity)))*100))
 
-reappraisal_plot <- ggplot(pilot_b_tidy, 
+# Low intensiy pie chart
+low_plot <- ggplot(rep_data_for_plot, 
        aes(x="", 
-           y=percent_reappraisal, 
-           fill=intensity)) +
+           y=percent_low, 
+           fill=Strategy)) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
-  labs(title = "Reappraisal") +
-  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  labs(title = "Low Emotional Intensity") +
+  scale_color_manual(values = c("#408F8A", "#F4B43C")) +
+  scale_fill_manual(values = c("#408F8A", "#F4B43C")) +
   theme_void()
   
-distraction_plot <- ggplot(pilot_b_tidy, 
+# High intensity pie chart
+high_plot <- ggplot(rep_data_for_plot, 
        aes(x="", 
-           y=percent_distraction, 
-           fill=intensity)) +
+           y=percent_high, 
+           fill=Strategy)) +
   geom_bar(stat="identity", width=1) +
   coord_polar("y", start=0) +
-  labs(title = "Distraction")  +
-  scale_color_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
-  scale_fill_manual(values = c("#E24263", "#408F8A", "#ED6F31", "#401959")) +
+  labs(title = "High Emotional Intensity")  +
+  scale_color_manual(values = c("#408F8A", "#F4B43C")) +
+  scale_fill_manual(values = c("#408F8A", "#F4B43C")) +
   theme_void()
-  
-reappraisal_plot + distraction_plot + plot_layout(ncol=2)
+```
+
+##### Original findings:
+
+![](original_figure.png){width="600"}
+
+##### Replication:
+
+```{r pie chart, echo=FALSE, message=FALSE, warning=FALSE}
+library(patchwork)
+low_plot + high_plot + plot_layout(ncol=2)
 ```
 
 ## Discussion
 
 ### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary
-result from the confirmatory analysis and the assessment of whether it
-replicated, partially replicated, or failed to replicate the original
-result.
+The present replication study examined the effects of emotional
+intensity on emotion regulation choice. The results clearly indicate
+that individuals prefer to use reappraisal as a strategy for regulating
+negative emotions when emotional intensity is low and distraction when
+emotional intensity is high (ηp2 = .91). This is consistent with the
+findings by Sheppes et al (2011) who first reported this effect (ηp2 =
+.71).
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from
-follow-up exploratory analysis, (b) assessment of the meaning of the
-replication (or not) - e.g., for a failure to replicate, are the
-differences between original and present study ones that definitely,
-plausibly, or are unlikely to have been moderators of the result, and
-(c) discussion of any objections or challenges raised by the current and
-original authors about the replication attempt. None of these need to be
-long.
+Overall, the success of this replication attempt and the fact that the
+large effect of emotional intensity on emotion regulation choice can be
+detected even when participants receive no corrective feedback or
+supervision goes a long way in showing the robustness of the effect and
+further strengthening our collective confidence in what has become one
+of the seminal findings in contemporary affective science.
+
+It is my hope that the fully online implementation of the emotion
+regulation choice paradigm that I developed for this project (and that
+is now publicly available in the "experiment" folder of the repository)
+will be a useful resource for researchers who wish to use this paradigm
+in future studies of emotion regulation.
