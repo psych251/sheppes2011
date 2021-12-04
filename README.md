@@ -23,7 +23,7 @@ Project repository for replication of Study 1 from "Emotion-Regulation Choice" (
 
 ### writeup
 
-1.  **pilot_a\_rawdata -** folder containing raw data collected as part of pilot A (non-naive participants; N = 2). The folder contains .csv files for each participant as well as a .csv file that with all participants' data titled **pilot_a.csv**
-2.  **pilot_b\_rawdata -** folder containing raw data collected as part of pilot B (naive participants recruited on Prolific; N = 3). The folder contains .csv files for each participant as well as a .csv file that with all participants' data titled **pilot_b.csv**
-3.  **replication_rawdata** - folder will contain raw data collected as part of the final replication attempt.
+1.  **pilot_a\_rawdata -** folder containing raw data collected as part of pilot A (non-naive participants; N = 2). The folder contains .csv files for each participant as well as a .csv file with all participants' data titled **pilot_a.csv**
+2.  **pilot_b\_rawdata -** folder containing raw data collected as part of pilot B (naive participants recruited on Prolific; N = 3). The folder contains .csv files for each participant as well as a .csv file with all participants' data titled **pilot_b.csv**
+3.  **replication_rawdata** - folder containing raw data collected as part of the final replication (20 participants recruited on Prolific). The structure of the folder contains .csv files for each participant as well as a .csv file with raw data concatenated across all 20 participants titled **replication_data.csv**
 4.  **sheppes2011_replication_report.Rmd ../.html** - R markdown report that includes detailed information about this replication attempt as well as documents all data processing and analyses.
