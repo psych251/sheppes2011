@@ -59,7 +59,7 @@ Original paper (as hosted in your repo):
 Preregistration: <https://osf.io/uzw4q/>
 
 Experiment (same for pilot a, pilot b, and final replication):
-[<https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
+[\<https://web.stanford.edu/\~kpetrova/cgi-bin/experiment.html>](https://web.stanford.edu/~kpetrova/cgi-bin/experiment.html){.uri}
 
 ## Methods
 
@@ -256,7 +256,7 @@ needed to detect a large effect size with 95% power.
 
 None.
 
-## Results 
+## Results
 
 ### Pilot A
 
@@ -374,7 +374,7 @@ confint(model_replication)
 eta_squared(model_replication)
 ```
 
-```{r plot pilot b, include=T, warning=FALSE, message=FALSE, echo = T}
+```{r plot final replication, include=T, warning=FALSE, message=FALSE, echo = T}
 library(patchwork)
 # Re-arranging data for plot
 rep_data_for_plot <- rep_data |>
